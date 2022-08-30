@@ -18,4 +18,4 @@ jobs:
          role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
          role-session-name: GithubActionsSession
     
-     - run: aws sts get-caller-identity
+     - run: aws s3 ls
