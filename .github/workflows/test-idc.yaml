@@ -5,7 +5,7 @@ on:
     
 jobs:
  build:
-   name: build
+   name: Configure AWS Credentials
    permissions:
      id-token: write
      contents: write
