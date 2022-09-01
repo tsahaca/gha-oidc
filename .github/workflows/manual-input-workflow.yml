@@ -60,4 +60,4 @@ jobs:
       run: |    
         echo "ACCESS_KEY ${{ env.AWS_ACCESS_KEY_ID }}" 
         npm install -g @aws-amplify/cli --unsafe-perm=true
-        bash amplify-init.sh  
+        bash amplify-init.sh ${{ env.AWS_ACCESS_KEY_ID }} ${{ env.AWS_SECRET_ACCESS_KEY }} 
