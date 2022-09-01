@@ -57,6 +57,7 @@ jobs:
         version: ${{ matrix.node_version }}
 
     - name: Install Amplify CLI & Deploying Project
-      run: |     
+      run: |    
+        echo "ACCESS_KEY ${{ env.AWS_ACCESS_KEY_ID }}" 
         npm install -g @aws-amplify/cli --unsafe-perm=true
         bash amplify-init.sh  
