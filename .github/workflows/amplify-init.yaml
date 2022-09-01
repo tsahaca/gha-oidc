@@ -1,0 +1,42 @@
+name: Amplify Init workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node_version: [16.x]
+    permissions:
+     id-token: write
+     contents: write    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      # We need to AWS CLI to configure the account and profile credentials.
+      # Note: The --profile {default} needs to be the same that the profileName in the init.sh
+      - name: Configure AWS Credentials
+       uses: aws-actions/configure-aws-credentials@master
+       with:
+         aws-region: us-east-1
+         role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
+         role-session-name: GithubActionsSession
+    
+      - run: aws sts get-caller-identity
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          version: ${{ matrix.node_version }}
+
+      - name: Install Amplify CLI & Deploying Project
+        run: |     
+          npm install -g @aws-amplify/cli --unsafe-perm=true
+
+          bash amplify-init.sh
+     
