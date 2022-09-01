@@ -11,6 +11,8 @@ REACTCONFIG="{\
 AWSCLOUDFORMATIONCONFIG="{\
 \"configLevel\":\"project\",\
 \"useProfile\":false,\
+\"accessKeyId\":\"$1\",\
+\"secretAccessKey\":\"$2\",\
 \"region\":\"us-east-1\"\
 }"
 AMPLIFY="{\
