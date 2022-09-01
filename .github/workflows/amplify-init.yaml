@@ -9,8 +9,8 @@ jobs:
       matrix:
         node_version: [16.x]
     permissions:
-     id-token: write
-     contents: write    
+      id-token: write
+      contents: write    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -21,11 +21,11 @@ jobs:
       # We need to AWS CLI to configure the account and profile credentials.
       # Note: The --profile {default} needs to be the same that the profileName in the init.sh
       - name: Configure AWS Credentials
-       uses: aws-actions/configure-aws-credentials@master
-       with:
-         aws-region: us-east-1
-         role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
-         role-session-name: GithubActionsSession
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{secrets.ROLE_TO_ASSUME}}
+          role-session-name: GithubActionsSession
     
       - run: aws sts get-caller-identity
 
